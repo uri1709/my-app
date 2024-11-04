@@ -1,70 +1,117 @@
-# Getting Started with Create React App
+создаём рабочую директорию
+git init (при сздании шаблона впервые этот шаг пропустить)
+git --version
+node --version
+npm --version
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+создаём .editorconfig в корне
+на сайте https://editorconfig.org/ пиздим настройки
+по итогу в файле это
+```.editorconfig
+root = true
+[*]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+charset = utf-8
+indent_style = tab
+indent_size = 4
+```
 
-In the project directory, you can run:
+иниициируем реакт приложение
+npx create-react-app my-app
+переходим в дирректорию приложения
+cd my-app
+далее ставим
+npm i eslint-config-prettier eslint-plugin-prettier prettier
 
-### `npm start`
+далее в файле package.json добавляем "prettier" и "plugins"
+```json
+"eslintConfig": {
+	"extends": [
+		"react-app",
+		"react-app/jest",
+		"prettier"
+	],
+	"plugins": [
+		"prettier"
+	]
+},
+```
+чтобы настроить prettier, нужно в корне приложения создать файл его конфигурации 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+prettierrc.json
+prettierrc.json
+https://prettier.io/docs/en/options
+```json
+{
+"printWidth": 90,
+"tabWidth": 4,
+"useTabs": true,
+"semi": true,
+"singleQuote": true,
+"trailingComma": "all"
+}
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+alt+shift+f проверить форматирование
+в глобальных настройках, в файле settings.json указать:
+"editor.rulers": [90]
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+причёсываем App.js
+```js
+import logo from "./logo.svg";
+import styles from "./app.module.css";
 
-### `npm run build`
+export const App = () => {
+	return (
+		<div className="App">
+			<header className={styles["App-header"]}>
+			<img src={logo} className={styles["App-logo"]} alt="logo" />
+			<p>
+				Edit <code>src/App.js</code> and save to reload.
+			</p>
+			<a
+				className="App-link"
+				href="https://reactjs.org"
+				target="_blank"
+				rel="noopener noreferrer">				
+				Learn React
+			</a>
+			</header>
+		</div>
+	);
+};
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+редактируем имя файла App.css, заменив на app.module.css
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+затем index.js
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { App } from "./App";
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-### `npm run eject`
+root.render(
+	<React.StrictMode>
+	<App />
+	</React.StrictMode>,
+);
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+удаляем файлы 
+- App.test.js
+- reportWebVitals.js
+- setupTests.js
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+настраиваем
+Работа с CSS & Динамический рендеринг CSS-классов
+https://create-react-app.dev/docs/adding-a-css-modules-stylesheet/
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[[JavaScript]]
